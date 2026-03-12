@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điều khiển Phòng Khách - IoT</title>
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+    <style>
+        /* TÙY CHỈNH RIÊNG CHO PHÒNG KHÁCH (TÔNG XANH DƯƠNG) */
+        
+        /* 1. Header màu xanh dương mát mẻ */
+        .header { 
+            background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%) !important; 
+        }
+
+        /* 2. Nút menu Phòng Khách nổi bật */
+        .nav a.active-khach {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border-left: 4px solid #1976d2;
+        }
+
+        /* 3. Khung chứa thiết bị (Dùng CSS Grid tự động co giãn) */
+        .khung-thiet-bi {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* 4. Thẻ thiết bị */
+        .the-thiet-bi {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-top: 4px solid #2196f3; /* Vạch xanh phía trên thẻ */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 190px;
+        }
+
+        .the-thiet-bi:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.15);
+        }
+
+        .the-thiet-bi p {
+            margin: 0 0 15px 0;
+            font-weight: bold;
+            color: #4a5568;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        /* 5. Thông số cảm biến */
+        .nhiet-do { color: #ff5722; font-size: 32px; font-weight: bold; }
+        .do-am { color: #2196f3; font-size: 32px; font-weight: bold; }
+
+        /* 6. Nút bấm điều khiển */
+        .nut-dieu-khien {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .nut-dieu-khien:hover { filter: brightness(1.1); }
+        .nut-dieu-khien:active { transform: scale(0.95); }
+
+        /* 7. Ảnh thiết bị */
+        .anh-thiet-bi { 
+            height: 65px; 
+            width: auto; 
+            object-fit: contain;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Đường kẻ ngang phân cách */
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 30px 0 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h3>Hệ thống IoT - Phòng Khách</h3>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar nav">
+            <ul>
+                <li><a href="./index.html">TRANG CHỦ</a></li>
+                <li><a href="./phongkhach.html" class="active-khach">PHÒNG KHÁCH</a></li>
+                <li><a href="./phongngu.html">PHÒNG NGỦ</a></li>
+                <li><a href="./phongbep.html">PHÒNG BẾP</a></li>
+            </ul>
+        </nav>
+        
+        <main class="content">
+            <h1 style="color: #1976d2;">Bảng điều khiển Phòng Khách</h1>
+            <p style="font-size: 16px;">Trạng thái: <span style="color: #4CAF50; font-weight: bold; background: #e8f5e9; padding: 5px 10px; border-radius: 20px;">Trực tuyến</span></p>
+
+            <div class="khung-thiet-bi">
+                <div class="the-thiet-bi">
+                    <p>Nhiệt độ</p>
+                    <div class="nhiet-do">28°C</div>
+                </div>
+
+                <div class="the-thiet-bi">
+                    <p>Độ ẩm</p>
+                    <div class="do-am">65%</div>
+                </div>
+            </div>
+
+            <hr> 
+            <h3 style="color: #4a5568; margin-bottom: 15px;">Thiết bị điện</h3>
+            
+            <div class="khung-thiet-bi">
+                <div class="the-thiet-bi">
+                    <p>Đèn trần</p>
+                    <img id="anh-den" src="ledoff.png" alt="Đèn trần" class="anh-thiet-bi">
+                    <button id="nut-den" class="nut-dieu-khien" onclick="doiTrangThaiThietBi('den')">Bật Đèn</button>
+                </div>
+
+                <div class="the-thiet-bi">
+                    <p>Tivi Samsung</p>
+                    <img id="anh-tivi" src="tivioff.png" alt="Tivi" class="anh-thiet-bi">
+                    <button id="nut-tivi" class="nut-dieu-khien" onclick="doiTrangThaiThietBi('tivi')">Bật Tivi</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>Hệ thống IoT - Phát triển bởi Sinh viên HCMUTE</p>
+    </footer>
+
+    <script>
+        function doiTrangThaiThietBi(loaiThietBi) {
+            var anh = document.getElementById('anh-' + loaiThietBi);
+            var nut = document.getElementById('nut-' + loaiThietBi);
+
+            if (loaiThietBi === 'den') {
+                if (anh.src.match("ledoff")) { 
+                    anh.src = "ledon.png";
+                    nut.innerText = "Tắt Đèn";
+                    nut.style.backgroundColor = "#f44336"; // Đỏ
+                } else {
+                    anh.src = "ledoff.png";
+                    nut.innerText = "Bật Đèn";
+                    nut.style.backgroundColor = "#4CAF50"; // Xanh lá
+                }
+            }
+            else if (loaiThietBi === 'tivi') {
+                if (anh.src.match("tivioff")) {
+                    anh.src = "tivion.png";
+                    nut.innerText = "Tắt Tivi";
+                    nut.style.backgroundColor = "#f44336"; // Đỏ
+                } else {
+                    anh.src = "tivioff.png";
+                    nut.innerText = "Bật Tivi";
+                    nut.style.backgroundColor = "#4CAF50"; // Xanh lá
+                }
+            }
+        }
+    </script>
+</body>
+</html>

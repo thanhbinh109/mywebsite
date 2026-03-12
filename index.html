@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hệ thống điều khiển nhà thông minh IoT">
+    <title>Hệ thống IoT - Tổng Quan</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        /* TÙY CHỈNH RIÊNG CHO TRANG CHỦ */
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+        }
+
+        .nav a.active-home {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            border-left: 4px solid #0f172a;
+        }
+
+        /* Lưới hiển thị Thống kê nhanh */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid #3b82f6; 
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h4 {
+            color: #64748b;
+            font-size: 14px;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .stat-card .status-ok { color: #10b981; font-size: 18px; }
+
+        /* Bảng Nhật ký và Thông tin hệ thống */
+        .dashboard-details {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .panel {
+            flex: 1;
+            min-width: 300px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .panel h3 {
+            color: #1e293b;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-size: 14px;
+            color: #4a5568;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .log-time {
+            font-weight: bold;
+            color: #3b82f6;
+            margin-right: 15px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h3>Hệ thống Quản lý Nhà Thông Minh (SmartHome IoT)</h3>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar nav">
+            <ul>
+                <li><a href="./index.html" class="active-home">TRANG CHỦ</a></li>
+                <li><a href="./phongkhach.html">PHÒNG KHÁCH</a></li>
+                <li><a href="./phongngu.html">PHÒNG NGỦ</a></li>
+                <li><a href="./phongbep.html">PHÒNG BẾP</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1 style="color: #1e293b; text-align: left; margin-bottom: 5px;">Tổng quan hệ thống</h1>
+            <p style="color: #64748b; text-align: left; margin-bottom: 30px;">Hệ thống đang hoạt động ổn định. Không có cảnh báo mới.</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Nhiệt độ TB</h4>
+                    <div class="value">27<span style="font-size: 18px;">°C</span></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Độ ẩm chung</h4>
+                    <div class="value">60<span style="font-size: 18px;">%</span></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Thiết bị đang bật</h4>
+                    <div class="value">03</div>
+                </div>
+                <div class="stat-card" style="border-top-color: #10b981;">
+                    <h4>An ninh</h4>
+                    <div class="value status-ok">An Toàn</div>
+                </div>
+            </div>
+
+            <div class="dashboard-details">
+                <div class="panel">
+                    <h3>Nhật ký hoạt động</h3>
+                    <ul class="info-list">
+                        <li><span><span class="log-time">10:00</span> Cảm biến Gas: Mức an toàn</span></li>
+                        <li><span><span class="log-time">09:45</span> Bật quạt trần - Phòng ngủ</span></li>
+                        <li><span><span class="log-time">09:30</span> Tắt đèn trần - Phòng khách</span></li>
+                        <li><span><span class="log-time">08:00</span> Cập nhật trạng thái Tủ lạnh</span></li>
+                        <li><span><span class="log-time">07:15</span> Khởi động hệ thống thành công</span></li>
+                    </ul>
+                </div>
+
+                <div class="panel">
+                    <h3>Thông tin ESP32 Controller</h3>
+                    <ul class="info-list">
+                        <li><strong>Trạng thái:</strong> <span style="color: #10b981; font-weight: bold;">Đang kết nối</span></li>
+                        <li><strong>Địa chỉ IP:</strong> <span>192.168.1.102</span></li>
+                        <li><strong>Tín hiệu Wi-Fi:</strong> <span>-55 dBm (Tốt)</span></li>
+                        <li><strong>Giao thức:</strong> <span>MQTT / WebSockets</span></li>
+                        <li><strong>Thời gian chạy (Uptime):</strong> <span>2 ngày, 4 giờ</span></li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>Hệ thống IoT - Phát triển bởi Sinh viên HCMUTE</p>
+    </footer>
+
+</body>
+</html>

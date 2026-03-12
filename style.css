@@ -1,0 +1,144 @@
+/* 1. THIẾT LẬP CHUNG */
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Đổi font chữ hiện đại hơn */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Nền xám rất nhạt, sang trọng */
+    color: #333;
+}
+
+/* 2. HEADER */
+.header {
+    /* Đổ màu gradient cho Header thêm xịn */
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Đổ bóng dưới header */
+}
+
+/* 3. KHUNG CHÍNH */
+.section {
+    display: flex;
+    min-height: 80vh;
+    max-width: 1200px; /* Giới hạn chiều rộng trên màn hình PC to */
+    margin: 30px auto; /* Tự động căn giữa màn hình */
+    background-color: #fff;
+    border-radius: 12px; /* Bo góc toàn bộ khung chính */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* Đổ bóng bao quanh khung */
+    overflow: hidden; /* Cắt phần góc bị lồi ra do bo tròn */
+}
+
+/* 4. MENU ĐIỀU HƯỚNG (Bên trái) */
+.nav {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-right: 1px solid #eaeaea; /* Đường kẻ mờ ngăn cách menu và nội dung */
+}
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav li {
+    margin-bottom: 12px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #4a5568;
+    display: block;
+    padding: 15px 20px;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease; /* Hiệu ứng mượt cho TẤT CẢ thay đổi */
+}
+
+/* Hiệu ứng khi di chuột vào Menu */
+.nav a:hover {
+    background-color: #ebf4ff; /* Nền xanh nhạt */
+    color: #3182ce; /* Chữ xanh đậm */
+    border-left: 4px solid #3182ce; /* Hiện vạch xanh bên trái */
+    transform: translateX(6px); /* Hiệu ứng trượt nhẹ nút bấm sang phải cực mượt */
+}
+
+/* 5. NỘI DUNG CHÍNH (Bên phải) */
+.content {
+    flex: 4;
+    background-color: #fafbfc;
+    padding: 40px;
+    text-align: center;
+}
+
+/* Căn chỉnh và thêm hiệu ứng cho hình ảnh trong content */
+.content img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease; /* Hiệu ứng mượt khi phóng to */
+}
+
+.content img:hover {
+    transform: scale(1.03); /* Phóng to ảnh 3% khi trỏ chuột */
+}
+
+/* 6. FOOTER */
+.footer {
+    background-color: #2d3748;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+}
+
+/* 7. RESPONSIVE (Cho điện thoại) */
+@media (max-width: 768px) {
+    .section {
+        flex-direction: column;
+        margin: 15px; /* Thu nhỏ lề trên mobile */
+        border-radius: 8px;
+    }
+    
+    .nav {
+        border-right: none;
+        border-bottom: 1px solid #eaeaea;
+        padding: 15px;
+    }
+
+    /* Dàn menu thành Grid 2 cột trên điện thoại để tiết kiệm diện tích */
+    .nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Khoảng cách giữa các nút */
+    }
+
+    .nav li {
+        flex: 1 1 calc(50% - 10px); /* Chia đôi màn hình cho 2 nút */
+        margin-bottom: 0;
+    }
+
+    .nav a {
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .nav a:hover {
+        transform: none; /* Tắt hiệu ứng trượt sang phải trên mobile để tránh lỗi chạm */
+        border-left: none;
+        border-bottom: 3px solid #3182ce;
+    }
+
+    .content {
+        padding: 20px 15px;
+    }
+}
