@@ -5,127 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IoT - Phòng Bếp</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <style>
-        /* TÙY CHỈNH RIÊNG CHO PHÒNG BẾP */
-        
-        /* 1. Header màu cam gradient cảnh báo */
-        .header { 
-            background: linear-gradient(135deg, #e64a19 0%, #ff7043 100%) !important; 
-        }
-
-        /* 2. Nút menu Phòng Bếp được làm nổi bật */
-        .nav a.active-bep {
-            background-color: #fff3e0;
-            color: #e64a19;
-            border-left: 4px solid #e64a19;
-        }
-
-        /* 3. Khung chứa thiết bị (Dùng CSS Grid) */
-        .khung-thiet-bi {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        /* 4. Thẻ thiết bị */
-        .the-thiet-bi {
-            background-color: #ffffff; 
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            display: flex;
-            flex-direction: column; 
-            justify-content: space-between;
-            align-items: center;      
-            border-top: 4px solid #ff9800;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            min-height: 190px;
-        }
-
-        .the-thiet-bi:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(230, 74, 25, 0.15);
-        }
-
-        .the-thiet-bi p { 
-            margin: 0 0 15px 0; 
-            font-weight: bold; 
-            color: #4a5568; 
-            font-size: 15px; 
-            text-align: center;
-        }
-
-        .status-bep {
-            color: #e64a19;
-            font-size: 26px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        /* 5. Nút điều khiển */
-        .nut-dieu-khien {
-            background-color: #ff5722; /* Màu cam mặc định */
-            color: white;
-            border: none;
-            padding: 10px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin-top: auto; 
-        }
-
-        .nut-dieu-khien:hover { background-color: #d84315; }
-        .nut-dieu-khien:active { transform: scale(0.95); }
-
-        .anh-thiet-bi { 
-            height: 65px; 
-            width: auto; 
-            object-fit: contain; 
-            margin-bottom: 10px;
-        }
-    </style>
 </head>
 <body>
+    <button onclick="doiGiaoDien()" style="position: fixed; top: 15px; right: 20px; z-index: 1000; padding: 10px 15px; border-radius: 50px; border: none; background: #3b82f6; color: white; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">🌓 Sáng / Tối</button>
 
     <header class="header">
         <h3>Hệ thống IoT - Phòng Bếp</h3>
     </header>
 
-    <div class="main-container">
+    <div class="section">
         <nav class="sidebar nav">
             <ul>
                 <li><a href="./index.html">TRANG CHỦ</a></li>
                 <li><a href="./phongkhach.html">PHÒNG KHÁCH</a></li>
                 <li><a href="./phongngu.html">PHÒNG NGỦ</a></li>
-                <li><a href="./phongbep.html" class="active-bep">PHÒNG BẾP</a></li>
+                <li><a href="./phongbep.html" style="background: rgba(230, 74, 25, 0.2); color: #e64a19; border-left: 4px solid #e64a19;">PHÒNG BẾP</a></li>
             </ul>
         </nav>
         
         <main class="content">
             <h1 style="color: #e64a19;">An toàn nhà bếp</h1>
-            <p style="font-size: 16px;">Trạng thái: <span style="color: #e64a19; font-weight: bold; background: #fff3e0; padding: 5px 10px; border-radius: 20px;">Đang giám sát</span></p>
+            <p>Trạng thái: <span style="color: #e64a19; font-weight: bold;">Đang giám sát</span></p>
 
-            <div class="khung-thiet-bi">
-                
-                <div class="the-thiet-bi">
-                    <p>Cảm biến Gas</p>
-                    <div class="status-bep">An toàn</div>
+            <div class="khung-thiet-bi" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 25px; margin-top: 30px;">
+                <div class="the-thiet-bi" style="border-top: 4px solid #ff9800; padding: 20px; border-radius: 15px; text-align: center;">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Cảm biến Gas</p>
+                    <div style="color: #e64a19; font-size: 26px; font-weight: bold;">An toàn</div>
                 </div>
 
-                <div class="the-thiet-bi">
-                    <p>Tủ lạnh</p>
-                    <div class="status-bep">4°C</div>
+                <div class="the-thiet-bi" style="border-top: 4px solid #ff9800; padding: 20px; border-radius: 15px; text-align: center;">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Tủ lạnh</p>
+                    <div style="color: #e64a19; font-size: 26px; font-weight: bold;">4°C</div>
                 </div>
 
-                <div class="the-thiet-bi">
-                    <p>Máy hút mùi</p>
-                    <img id="anh-quat" src="mayhutmuioff.png" alt="Máy hút mùi" class="anh-thiet-bi">
-                    <button id="nut-quat" class="nut-dieu-khien" onclick="doiTrangThaiThietBi('quat')">Bật</button>
+                <div class="the-thiet-bi" style="border-top: 4px solid #ff9800; padding: 20px; border-radius: 15px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 190px;">
+                    <p style="font-weight: bold;">Máy hút mùi</p>
+                    <img id="anh-quat" src="mayhutmuioff.png" alt="Máy hút mùi" style="height: 65px; margin: 10px 0;">
+                    <button id="nut-quat" class="nut-dieu-khien" onclick="doiTrangThaiThietBi('quat')" style="background-color: #ff5722; color: white; border: none; padding: 10px 0; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold;">Bật</button>
                 </div>
-
             </div>
         </main>
     </div>
@@ -134,23 +51,58 @@
         <p>Hệ thống IoT - Phát triển bởi Sinh viên HCMUTE</p>
     </footer>
 
+    <div id="toast-container"></div>
+
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('.nav a');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); document.body.classList.add('page-exit');
+                    setTimeout(() => { window.location.href = this.href; }, 300);
+                });
+            });
+
+            // Khôi phục
+            if(localStorage.getItem('tb_quat_bep') === 'on') {
+                document.getElementById('anh-quat').src = "mayhutmuion.png";
+                document.getElementById('nut-quat').innerText = "Tắt";
+                document.getElementById('nut-quat').style.backgroundColor = "#3182ce";
+            }
+        });
+
+        function ghiNhatKy(hanhDong) {
+            const now = new Date(); const gioPhut = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+            let nhatKy = JSON.parse(localStorage.getItem('nhatKyHoatDong')) || [];
+            nhatKy.unshift({ thoiGian: gioPhut, hanhDong: hanhDong });
+            if (nhatKy.length > 5) nhatKy.pop(); 
+            localStorage.setItem('nhatKyHoatDong', JSON.stringify(nhatKy));
+        }
+
+        function doiGiaoDien() {
+            document.body.classList.toggle('dark-mode'); const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            if(isDark) thongBao('Đã bật Giao diện Tối 🌙'); else thongBao('Đã bật Giao diện Sáng ☀️');
+        }
+        if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+
+        function thongBao(noiDung) {
+            const container = document.getElementById('toast-container'); const toast = document.createElement('div');
+            toast.className = 'toast'; toast.innerHTML = '🔔 ' + noiDung; container.appendChild(toast);
+            setTimeout(() => { toast.classList.add('hide'); setTimeout(() => toast.remove(), 400); }, 3000);
+        }
+
         function doiTrangThaiThietBi(type) {
             var anh = document.getElementById('anh-' + type);
             var nut = document.getElementById('nut-' + type);
 
             if (type === 'quat') {
-                // Kiểm tra xem tên file ảnh hiện tại có chứa chữ "mayhutmuioff" không
                 if (anh.src.match("mayhutmuioff")) {
-                    // BẬT THIẾT BỊ
-                    anh.src = "mayhutmuion.png"; // Đổi sang ảnh đang hút
-                    nut.innerText = "Tắt";
-                    nut.style.backgroundColor = "#3182ce"; // Đổi nút sang màu xanh dương
+                    anh.src = "mayhutmuion.png"; nut.innerText = "Tắt"; nut.style.backgroundColor = "#3182ce"; 
+                    localStorage.setItem('tb_quat_bep', 'on'); thongBao("Đã BẬT Máy hút mùi bếp"); ghiNhatKy("Bật máy hút mùi - Phòng bếp");
                 } else {
-                    // TẮT THIẾT BỊ
-                    anh.src = "mayhutmuioff.png"; // Đổi về ảnh đã tắt
-                    nut.innerText = "Bật";
-                    nut.style.backgroundColor = "#ff5722"; // Đổi nút về màu cam ban đầu
+                    anh.src = "mayhutmuioff.png"; nut.innerText = "Bật"; nut.style.backgroundColor = "#ff5722"; 
+                    localStorage.setItem('tb_quat_bep', 'off'); thongBao("Đã TẮT Máy hút mùi bếp"); ghiNhatKy("Tắt máy hút mùi - Phòng bếp");
                 }
             }
         }

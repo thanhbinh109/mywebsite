@@ -1,144 +1,204 @@
-/* 1. THIẾT LẬP CHUNG */
+/* =========================================
+   1. THIẾT LẬP CHUNG & NỀN CHUYỂN ĐỘNG SÁNG
+========================================= */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --text-color: #333333;
+    --text-muted: #64748b;
+    --shadow-color: rgba(31, 38, 135, 0.1);
+}
+
 * {
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Đổi font chữ hiện đại hơn */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: #f0f2f5; /* Nền xám rất nhạt, sang trọng */
-    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    
+    /* HIỆU ỨNG NỀN SÁNG CHUYỂN ĐỘNG */
+    background: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #e0c3fc, #8ec5fc);
+    background-size: 300% 300%;
+    animation: gradientMove 15s ease infinite, pageEnter 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    transition: color 0.5s ease;
 }
 
-/* 2. HEADER */
-.header {
-    /* Đổ màu gradient cho Header thêm xịn */
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
-    color: white;
+/* =========================================
+   2. GIAO DIỆN TỐI (DARK MODE) & NỀN TỐI
+========================================= */
+body.dark-mode {
+    --glass-bg: rgba(30, 41, 59, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+
+    /* HIỆU ỨNG NỀN TỐI CHUYỂN ĐỘNG */
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f172a);
+    background-size: 300% 300%;
+    animation: gradientMove 15s ease infinite, pageEnter 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =========================================
+   3. HIỆU ỨNG KÍNH (GLASSMORPHISM)
+========================================= */
+.section, .nav, .content, .panel, .the-thiet-bi, .stat-card, .header, .footer {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: 0 8px 32px 0 var(--shadow-color) !important;
+    color: var(--text-color);
+    transition: all 0.4s ease;
+}
+
+.header, .footer {
     text-align: center;
     padding: 25px 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Đổ bóng dưới header */
 }
 
-/* 3. KHUNG CHÍNH */
+.footer { margin-top: auto; padding: 15px; }
+
+/* =========================================
+   4. BỐ CỤC KHUNG CHÍNH & MENU
+========================================= */
 .section {
     display: flex;
-    min-height: 80vh;
-    max-width: 1200px; /* Giới hạn chiều rộng trên màn hình PC to */
-    margin: 30px auto; /* Tự động căn giữa màn hình */
-    background-color: #fff;
-    border-radius: 12px; /* Bo góc toàn bộ khung chính */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* Đổ bóng bao quanh khung */
-    overflow: hidden; /* Cắt phần góc bị lồi ra do bo tròn */
+    max-width: 1200px;
+    width: 95%;       /* GIỮ KHUNG TO, KHÔNG BỊ NHỎ LẠI */
+    min-height: 85vh; /* GIỮ KHUNG DÀI */
+    margin: 30px auto;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
-/* 4. MENU ĐIỀU HƯỚNG (Bên trái) */
 .nav {
     flex: 1;
-    background-color: #ffffff;
     padding: 20px;
-    border-right: 1px solid #eaeaea; /* Đường kẻ mờ ngăn cách menu và nội dung */
+    border-right: 1px solid var(--glass-border) !important;
 }
 
-.nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.nav li {
-    margin-bottom: 12px;
-}
+.nav ul { list-style-type: none; padding: 0; margin: 0; }
+.nav li { margin-bottom: 12px; }
 
 .nav a {
     text-decoration: none;
-    color: #4a5568;
+    color: var(--text-color);
     display: block;
     padding: 15px 20px;
     font-weight: 600;
     font-size: 15px;
-    background-color: #f8f9fa;
     border-radius: 8px;
     border-left: 4px solid transparent;
-    transition: all 0.3s ease; /* Hiệu ứng mượt cho TẤT CẢ thay đổi */
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1); 
 }
 
-/* Hiệu ứng khi di chuột vào Menu */
 .nav a:hover {
-    background-color: #ebf4ff; /* Nền xanh nhạt */
-    color: #3182ce; /* Chữ xanh đậm */
-    border-left: 4px solid #3182ce; /* Hiện vạch xanh bên trái */
-    transform: translateX(6px); /* Hiệu ứng trượt nhẹ nút bấm sang phải cực mượt */
+    background: rgba(49, 130, 206, 0.2);
+    color: #3182ce;
+    border-left: 4px solid #3182ce;
+    transform: translateX(6px);
 }
 
-/* 5. NỘI DUNG CHÍNH (Bên phải) */
 .content {
     flex: 4;
-    background-color: #fafbfc;
     padding: 40px;
     text-align: center;
 }
 
-/* Căn chỉnh và thêm hiệu ứng cho hình ảnh trong content */
 .content img {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.4s ease; /* Hiệu ứng mượt khi phóng to */
+    transition: transform 0.4s ease;
+}
+.content img:hover { transform: scale(1.03); }
+
+/* =========================================
+   5. THÔNG BÁO ĐẨY (TOAST)
+========================================= */
+#toast-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.content img:hover {
-    transform: scale(1.03); /* Phóng to ảnh 3% khi trỏ chuột */
+.toast {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    color: var(--text-color);
+    padding: 16px 24px;
+    border-radius: 12px;
+    border-left: 6px solid #10b981;
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* 6. FOOTER */
-.footer {
-    background-color: #2d3748;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: auto;
+@keyframes slideInRight {
+    from { transform: translateX(120%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
-/* 7. RESPONSIVE (Cho điện thoại) */
+.toast.hide { animation: fadeOutRight 0.4s ease forwards; }
+
+@keyframes fadeOutRight {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(120%); opacity: 0; }
+}
+
+/* =========================================
+   6. HIỆU ỨNG CHUYỂN CẢNH TRANG & QUẠT
+========================================= */
+@keyframes pageEnter {
+    0% { opacity: 0; transform: translateY(-15px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.page-exit {
+    animation: pageExit 0.3s ease-in forwards !important;
+}
+
+@keyframes pageExit {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-15px); }
+}
+
+@keyframes xoayQuat {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.quat-dang-quay { animation: xoayQuat 0.8s linear infinite; }
+
+/* =========================================
+   7. RESPONSIVE (ĐIỆN THOẠI)
+========================================= */
 @media (max-width: 768px) {
-    .section {
-        flex-direction: column;
-        margin: 15px; /* Thu nhỏ lề trên mobile */
-        border-radius: 8px;
-    }
-    
-    .nav {
-        border-right: none;
-        border-bottom: 1px solid #eaeaea;
-        padding: 15px;
-    }
-
-    /* Dàn menu thành Grid 2 cột trên điện thoại để tiết kiệm diện tích */
-    .nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; /* Khoảng cách giữa các nút */
-    }
-
-    .nav li {
-        flex: 1 1 calc(50% - 10px); /* Chia đôi màn hình cho 2 nút */
-        margin-bottom: 0;
-    }
-
-    .nav a {
-        text-align: center;
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .nav a:hover {
-        transform: none; /* Tắt hiệu ứng trượt sang phải trên mobile để tránh lỗi chạm */
-        border-left: none;
-        border-bottom: 3px solid #3182ce;
-    }
-
-    .content {
-        padding: 20px 15px;
-    }
+    .section { flex-direction: column; margin: 15px; width: auto; min-height: auto; }
+    .nav { border-right: none; border-bottom: 1px solid var(--glass-border) !important; padding: 15px; }
+    .nav ul { display: flex; flex-wrap: wrap; gap: 10px; }
+    .nav li { flex: 1 1 calc(50% - 10px); margin-bottom: 0; }
+    .nav a { text-align: center; padding: 12px; font-size: 14px; }
+    .nav a:hover { transform: none; border-left: none; border-bottom: 3px solid #3182ce; }
+    .content { padding: 20px 15px; }
 }

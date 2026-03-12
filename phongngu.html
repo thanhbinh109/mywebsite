@@ -5,156 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IoT - Phòng Ngủ</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <style>
-        /* TÙY CHỈNH RIÊNG CHO PHÒNG NGỦ (TÔNG XANH TÍM) */
-        
-        /* 1. Header màu xanh tím tĩnh lặng */
-        .header { 
-            background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%) !important; 
-        }
-
-        /* 2. Nút menu Phòng Ngủ nổi bật */
-        .nav a.active-ngu {
-            background-color: #e8eaf6;
-            color: #3f51b5;
-            border-left: 4px solid #3f51b5;
-        }
-
-        /* 3. Khung chứa thiết bị (Dùng CSS Grid) */
-        .khung-thiet-bi {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-
-        /* 4. Thẻ thiết bị */
-        .the-thiet-bi {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            display: flex;
-            flex-direction: column; 
-            justify-content: space-between;
-            align-items: center; 
-            border-top: 4px solid #5c6bc0; /* Vạch tím phía trên thẻ */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            min-height: 190px;
-        }
-
-        .the-thiet-bi:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(63, 81, 181, 0.15);
-        }
-
-        .the-thiet-bi p {
-            margin: 0 0 15px 0;
-            font-weight: bold;
-            color: #4a5568;
-            font-size: 15px;
-            text-align: center;
-            text-transform: capitalize; /* Tự động viết hoa chữ cái đầu */
-        }
-
-        /* 5. Thông số cảm biến */
-        .status-so {
-            color: #3f51b5;
-            font-size: 32px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        /* 6. Nút bấm điều khiển */
-        .nut-dieu-khien {
-            background-color: #673ab7;
-            color: white;
-            border: none;
-            padding: 10px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin-top: auto;
-        }
-
-        .nut-dieu-khien:hover { filter: brightness(1.1); }
-        .nut-dieu-khien:active { transform: scale(0.95); }
-
-        /* 7. Ảnh thiết bị */
-        .anh-thiet-bi { 
-            height: 65px; 
-            width: auto; 
-            object-fit: contain;
-            margin-bottom: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        /* 8. HIỆU ỨNG XOAY CHO QUẠT */
-        @keyframes xoayQuat {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .quat-dang-quay {
-            animation: xoayQuat 0.8s linear infinite; /* Tốc độ quay của quạt */
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: #e2e8f0;
-            margin: 30px 0 20px 0;
-        }
-    </style>
 </head>
 <body>
+    <button onclick="doiGiaoDien()" style="position: fixed; top: 15px; right: 20px; z-index: 1000; padding: 10px 15px; border-radius: 50px; border: none; background: #3b82f6; color: white; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">🌓 Sáng / Tối</button>
 
     <header class="header">
         <h3>Hệ thống IoT - Phòng Ngủ</h3>
     </header>
 
-    <div class="main-container">
+    <div class="section">
         <nav class="sidebar nav">
             <ul>
                 <li><a href="./index.html">TRANG CHỦ</a></li>
                 <li><a href="./phongkhach.html">PHÒNG KHÁCH</a></li>
-                <li><a href="./phongngu.html" class="active-ngu">PHÒNG NGỦ</a></li>
+                <li><a href="./phongngu.html" style="background: rgba(63, 81, 181, 0.2); color: #3f51b5; border-left: 4px solid #3f51b5;">PHÒNG NGỦ</a></li>
                 <li><a href="./phongbep.html">PHÒNG BẾP</a></li>
             </ul>
         </nav>
         
         <main class="content">
             <h1 style="color: #3f51b5;">Chế độ nghỉ ngơi</h1>
-            <p style="font-size: 16px;">Trạng thái: <span style="color: #3f51b5; font-weight: bold; background: #e8eaf6; padding: 5px 10px; border-radius: 20px;">Êm dịu</span></p>
+            <p>Trạng thái: <span style="color: #3f51b5; font-weight: bold;">Êm dịu</span></p>
 
-            <div class="khung-thiet-bi">
-                <div class="the-thiet-bi">
-                    <p>Nhiệt độ ngủ</p>
-                    <div class="status-so">26°C</div>
+            <div class="khung-thiet-bi" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 25px; margin-top: 20px;">
+                <div class="the-thiet-bi" style="border-top: 4px solid #5c6bc0; padding: 20px; border-radius: 15px; text-align: center;">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Nhiệt độ ngủ</p>
+                    <div style="color: #3f51b5; font-size: 32px; font-weight: bold;">26°C</div>
                 </div>
-                <div class="the-thiet-bi">
-                    <p>Ánh sáng</p>
-                    <div class="status-so">30%</div>
+                <div class="the-thiet-bi" style="border-top: 4px solid #5c6bc0; padding: 20px; border-radius: 15px; text-align: center;">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Ánh sáng</p>
+                    <div style="color: #3f51b5; font-size: 32px; font-weight: bold;">30%</div>
                 </div>
             </div>
 
-            <hr>
-            <h3 style="color: #4a5568; margin-bottom: 15px;">Thiết bị điện</h3>
+            <hr style="border: 0; height: 1px; background: rgba(128,128,128,0.2); margin: 30px 0;">
+            <h3 style="margin-bottom: 15px;">Thiết bị điện</h3>
             
-            <div class="khung-thiet-bi">
-                <div class="the-thiet-bi">
-                    <p>Quạt trần</p>
-                    <img id="anh-quat" src="fanoff.png" alt="Quạt trần" class="anh-thiet-bi">
-                    <button id="nut-quat" class="nut-dieu-khien" onclick="doiTrangThaiThietBi('quat')">Bật</button>
+            <div class="khung-thiet-bi" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 25px;">
+                <div class="the-thiet-bi" style="border-top: 4px solid #5c6bc0; padding: 20px; border-radius: 15px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 190px;">
+                    <p style="font-weight: bold;">Quạt trần</p>
+                    <img id="anh-quat" src="fanoff.png" alt="Quạt trần" style="height: 65px; margin: 10px 0;" class="anh-thiet-bi">
+                    <button id="nut-quat" class="nut-dieu-khien" onclick="doiTrangThaiThietBi('quat')" style="background-color: #673ab7; color: white; border: none; padding: 10px 0; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold;">Bật</button>
                 </div>
 
-                <div class="the-thiet-bi">
-                    <p>Cửa phòng</p>
-                    <img id="anh-cua" src="dooroff.png" alt="Cửa phòng" class="anh-thiet-bi">
-                    <button id="nut-cua" class="nut-dieu-khien" onclick="doiTrangThaiThietBi('cua')" style="background-color: #ff9800;">Mở Cửa</button>
+                <div class="the-thiet-bi" style="border-top: 4px solid #5c6bc0; padding: 20px; border-radius: 15px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 190px;">
+                    <p style="font-weight: bold;">Cửa phòng</p>
+                    <img id="anh-cua" src="dooroff.png" alt="Cửa phòng" style="height: 65px; margin: 10px 0;">
+                    <button id="nut-cua" class="nut-dieu-khien" onclick="doiTrangThaiThietBi('cua')" style="background-color: #ff9800; color: white; border: none; padding: 10px 0; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold;">Mở Cửa</button>
                 </div>
             </div>
         </main>
@@ -164,33 +61,73 @@
         <p>Hệ thống IoT - Phát triển bởi Sinh viên HCMUTE</p>
     </footer>
 
+    <div id="toast-container"></div>
+
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('.nav a');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); document.body.classList.add('page-exit');
+                    setTimeout(() => { window.location.href = this.href; }, 300);
+                });
+            });
+
+            // Khôi phục
+            if(localStorage.getItem('tb_quat_ngu') === 'on') {
+                document.getElementById('anh-quat').src = "fanon.png";
+                document.getElementById('anh-quat').classList.add('quat-dang-quay');
+                document.getElementById('nut-quat').innerText = "Tắt";
+                document.getElementById('nut-quat').style.backgroundColor = "#f44336";
+            }
+            if(localStorage.getItem('tb_cua_ngu') === 'on') {
+                document.getElementById('anh-cua').src = "dooron.png";
+                document.getElementById('nut-cua').innerText = "Đóng Cửa";
+                document.getElementById('nut-cua').style.backgroundColor = "#607d8b";
+            }
+        });
+
+        function ghiNhatKy(hanhDong) {
+            const now = new Date(); const gioPhut = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+            let nhatKy = JSON.parse(localStorage.getItem('nhatKyHoatDong')) || [];
+            nhatKy.unshift({ thoiGian: gioPhut, hanhDong: hanhDong });
+            if (nhatKy.length > 5) nhatKy.pop(); 
+            localStorage.setItem('nhatKyHoatDong', JSON.stringify(nhatKy));
+        }
+
+        function doiGiaoDien() {
+            document.body.classList.toggle('dark-mode'); const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            if(isDark) thongBao('Đã bật Giao diện Tối 🌙'); else thongBao('Đã bật Giao diện Sáng ☀️');
+        }
+        if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+
+        function thongBao(noiDung) {
+            const container = document.getElementById('toast-container'); const toast = document.createElement('div');
+            toast.className = 'toast'; toast.innerHTML = '🔔 ' + noiDung; container.appendChild(toast);
+            setTimeout(() => { toast.classList.add('hide'); setTimeout(() => toast.remove(), 400); }, 3000);
+        }
+
         function doiTrangThaiThietBi(type) {
             var anh = document.getElementById('anh-' + type);
             var nut = document.getElementById('nut-' + type);
 
             if (type === 'quat') {
                 if (anh.src.match("fanoff")) {
-                    anh.src = "fanon.png"; // Vẫn đổi ảnh nếu bạn có ảnh fanon
-                    anh.classList.add('quat-dang-quay'); // Thêm hiệu ứng xoay CSS
-                    nut.innerText = "Tắt";
-                    nut.style.backgroundColor = "#f44336"; // Nút đỏ
+                    anh.src = "fanon.png"; anh.classList.add('quat-dang-quay'); nut.innerText = "Tắt"; nut.style.backgroundColor = "#f44336"; 
+                    localStorage.setItem('tb_quat_ngu', 'on'); thongBao("Đã BẬT Quạt trần Phòng Ngủ"); ghiNhatKy("Bật quạt trần - Phòng ngủ");
                 } else {
-                    anh.src = "fanoff.png";
-                    anh.classList.remove('quat-dang-quay'); // Dừng xoay
-                    nut.innerText = "Bật";
-                    nut.style.backgroundColor = "#673ab7"; // Nút tím
+                    anh.src = "fanoff.png"; anh.classList.remove('quat-dang-quay'); nut.innerText = "Bật"; nut.style.backgroundColor = "#673ab7"; 
+                    localStorage.setItem('tb_quat_ngu', 'off'); thongBao("Đã TẮT Quạt trần Phòng Ngủ"); ghiNhatKy("Tắt quạt trần - Phòng ngủ");
                 }
             }
             else if (type === 'cua') {
                 if (anh.src.match("dooroff")) {
-                    anh.src = "dooron.png"; 
-                    nut.innerText = "Đóng Cửa";
-                    nut.style.backgroundColor = "#607d8b"; // Màu xám chì
+                    anh.src = "dooron.png"; nut.innerText = "Đóng Cửa"; nut.style.backgroundColor = "#607d8b"; 
+                    localStorage.setItem('tb_cua_ngu', 'on'); thongBao("Cảnh báo: Cửa phòng ngủ đang MỞ"); ghiNhatKy("Mở cửa - Phòng ngủ");
                 } else {
-                    anh.src = "dooroff.png"; 
-                    nut.innerText = "Mở Cửa";
-                    nut.style.backgroundColor = "#ff9800"; // Màu cam
+                    anh.src = "dooroff.png"; nut.innerText = "Mở Cửa"; nut.style.backgroundColor = "#ff9800"; 
+                    localStorage.setItem('tb_cua_ngu', 'off'); thongBao("An ninh: Đã ĐÓNG cửa phòng ngủ"); ghiNhatKy("Đóng cửa - Phòng ngủ");
                 }
             }
         }
